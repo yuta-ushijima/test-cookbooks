@@ -11,7 +11,8 @@ wp_admin_email = node[:deploy][:wordpress][:wp_admin_email]
 execute "wp configure" do 
   command "wp core config --dbname=#{dbname} --dbuser=#{dbuser} -- dbpass=#{dbpass} --dbhost=#{dbhost}"
   cwd "#{wpdir}"
-  user "deploy" not_if { File.exists?("#{wpdir}/wp-config.php") }
+  user "deploy"
+  not_if { File.exists?("#{wpdir}/wp-config.php") }
   action :run
 end
 
